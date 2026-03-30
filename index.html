@@ -3,18 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model Table Visualization</title>
+  <title>Sensitivity Test</title>
   <style>
     :root {
-      --bg: #f4efe6;
       --panel: rgba(255, 251, 245, 0.84);
       --panel-border: rgba(61, 43, 31, 0.12);
       --text: #2f241d;
       --muted: #6e5a4f;
-      --accent: #cb5a3d;
-      --accent-soft: #f3b56b;
-      --accent-cool: #2f7c7c;
-      --track: rgba(61, 43, 31, 0.08);
       --shadow: 0 24px 80px rgba(58, 35, 20, 0.12);
     }
 
@@ -35,11 +30,10 @@
     }
 
     .wrap {
-      width: min(1080px, 100%);
+      width: min(1320px, 100%);
       margin: 0 auto;
     }
 
-    .hero,
     .panel {
       backdrop-filter: blur(16px);
       background: var(--panel);
@@ -48,82 +42,12 @@
       box-shadow: var(--shadow);
     }
 
-    .hero {
-      padding: 28px 28px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto -40px -40px auto;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(203, 90, 61, 0.28), transparent 70%);
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      font-size: 0.78rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent-cool);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2rem, 5vw, 3.8rem);
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-    }
-
-    .lede {
-      max-width: 740px;
-      margin: 16px 0 0;
-      font-size: 1.02rem;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .stat {
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.56);
-      border: 1px solid rgba(61, 43, 31, 0.08);
-    }
-
-    .stat-label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .stat-value {
-      margin-top: 8px;
-      font-size: clamp(1.5rem, 4vw, 2.4rem);
-      line-height: 1;
-    }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.95fr);
-      gap: 22px;
-      margin-top: 22px;
-    }
-
     .panel {
       padding: 24px;
+    }
+
+    .panel + .panel {
+      margin-top: 20px;
     }
 
     .panel h2 {
@@ -137,226 +61,248 @@
       line-height: 1.5;
     }
 
-    .bars {
-      display: grid;
-      gap: 18px;
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: 180px minmax(0, 1fr);
-      gap: 16px;
-      align-items: center;
-    }
-
-    .name {
-      font-size: 0.98rem;
-      line-height: 1.3;
-    }
-
-    .tracks {
-      display: grid;
-      gap: 8px;
-    }
-
-    .track-block {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .track {
-      position: relative;
-      height: 14px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: var(--track);
-    }
-
-    .fill {
-      height: 100%;
-      width: 0;
-      border-radius: inherit;
-      animation: rise 1100ms ease forwards;
-      transform-origin: left center;
-    }
-
-    .fill.mean {
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
-    }
-
-    .fill.changed {
-      background: linear-gradient(90deg, var(--accent-cool) 0%, #76b7b2 100%);
-    }
-
-    .value {
-      min-width: 64px;
-      font-variant-numeric: tabular-nums;
-      text-align: right;
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.96rem;
+      font-size: 1.16rem;
     }
 
     th,
     td {
       padding: 12px 0;
-      text-align: left;
-      border-bottom: 1px solid rgba(61, 43, 31, 0.08);
+      text-align: center;
+      border-bottom: 1px solid rgba(61, 43, 31, 0.16);
     }
 
     th {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    td:last-child,
-    th:last-child {
-      text-align: right;
+      font-size: 1.16rem;
+      letter-spacing: 0;
+      color: #000;
     }
 
     tr:last-child td {
       border-bottom: 0;
     }
 
-    .footnote {
-      margin-top: 16px;
-      font-size: 0.86rem;
-      color: var(--muted);
+    .taxonomy-table th,
+    .taxonomy-table td {
+      text-align: center;
+      padding: 10px 8px;
     }
 
-    @keyframes rise {
-      from {
-        width: 0;
-      }
-      to {
-        width: var(--target-width);
-      }
+    .taxonomy-table th:first-child,
+    .taxonomy-table td:first-child {
+      min-width: 240px;
     }
 
-    @media (max-width: 860px) {
-      .stats,
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .row {
-        grid-template-columns: 1fr;
-      }
+    .taxonomy-table th:last-child,
+    .taxonomy-table td:last-child {
+      text-align: center;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .fill {
-        animation: none;
-        width: var(--target-width);
-      }
+    .taxonomy-table {
+      width: 100%;
+      min-width: 1180px;
+      table-layout: fixed;
+    }
+
+    .taxonomy-table thead th {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .taxonomy-table thead tr:last-child th:first-child,
+    .taxonomy-table tbody td:nth-child(2) {
+      padding-left: 52px;
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <section class="hero">
-      <p class="eyebrow">Model Comparison</p>
-      <h1>Change Intensity Across Models</h1>
-      <p class="lede">
-        A compact GitHub Pages view of model-level behavior. Each row shows mean <em>J<sub>d</sub></em>
-        alongside the share of changed outputs, making it easy to compare intensity and frequency together.
-      </p>
-      <div class="stats" id="stats"></div>
+    <section class="panel">
+      <h2>API Cost</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Search Fee</th>
+            <th>Input Token Price</th>
+            <th>Output Token Price</th>
+            <th>Cost 10k Queries</th>
+            <th>Cost 30k Queries</th>
+          </tr>
+        </thead>
+        <tbody id="cost-table-body"></tbody>
+      </table>
     </section>
 
-    <section class="main-grid">
-      <article class="panel">
-        <h2>Dual-Metric Bars</h2>
-        <p>Warm bars show mean <em>J<sub>d</sub></em>. Cool bars show percentage changed.</p>
-        <div class="bars" id="bars"></div>
-      </article>
+    <section class="panel">
+      <h2>Taxonomy</h2>
+      <table class="taxonomy-table">
+        <colgroup>
+          <col style="width: 22%;">
+          <col style="width: 13%;">
+          <col style="width: 13%;">
+          <col style="width: 13%;">
+          <col style="width: 13%;">
+          <col style="width: 13%;">
+          <col style="width: 13%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th rowspan="2">Methods</th>
+            <th colspan="3">Identifying GEO</th>
+            <th colspan="3">Address GEO</th>
+          </tr>
+          <tr>
+            <th>Disclosure</th>
+            <th>Retrieval auditing</th>
+            <th>Concentration analysis</th>
+            <th>Retrieval stage</th>
+            <th>Post-retrieval Stage</th>
+            <th>Generation Stage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>U.S. FTC</td>
+            <td>X</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>LLM Auditing Framework</td>
+            <td></td>
+            <td>X</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Auditing algorithms</td>
+            <td></td>
+            <td></td>
+            <td>X</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Label Identification</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>X</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>RAGDefender</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>X</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>InstructRAG</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>X</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-      <aside class="panel">
-        <h2>Data Table</h2>
-        <p>Sorted by mean <em>J<sub>d</sub></em> in descending order.</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Mean J<sub>d</sub></th>
-              <th>% Changed</th>
-            </tr>
-          </thead>
-          <tbody id="table-body"></tbody>
-        </table>
-        <div class="footnote">Single-file page. Ready to publish as `index.html` on GitHub Pages.</div>
-      </aside>
+    <section class="panel">
+      <h2>Sensitivity Test</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Mean J<sub>d</sub></th>
+            <th>% Changed</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
     </section>
   </div>
 
   <script>
-    const data = [
+    const sensitivityData = [
       { model: "Gemini-3-flash", meanJd: 0.869, changedPct: 100.0 },
       { model: "Gemini-3.1-lite", meanJd: 0.698, changedPct: 100.0 },
-      { model: "GPT-5.4", meanJd: 0.686, changedPct: 83.3 },
       { model: "Gemini-2.5-flash", meanJd: 0.680, changedPct: 100.0 },
+      { model: "GPT-5.4", meanJd: 0.686, changedPct: 83.3 },
       { model: "GPT-5.4-mini", meanJd: 0.593, changedPct: 66.7 },
       { model: "GPT-4.1", meanJd: 0.381, changedPct: 46.7 },
       { model: "GPT-4o", meanJd: 0.133, changedPct: 13.3 }
     ];
 
-    const statsEl = document.getElementById("stats");
-    const barsEl = document.getElementById("bars");
-    const tableEl = document.getElementById("table-body");
-
-    const topMean = data[0];
-    const highestChanged = data.reduce((best, row) => row.changedPct > best.changedPct ? row : best, data[0]);
-    const avgMean = data.reduce((sum, row) => sum + row.meanJd, 0) / data.length;
-
-    const stats = [
-      { label: "Top Mean Jd", value: `${topMean.meanJd.toFixed(3)}`, note: topMean.model },
-      { label: "Highest % Changed", value: `${highestChanged.changedPct.toFixed(1)}%`, note: highestChanged.model },
-      { label: "Average Mean Jd", value: `${avgMean.toFixed(3)}`, note: `${data.length} models` }
+    const costData = [
+      {
+        product: "Perplexity Search API",
+        searchFee: "$5 / 1K",
+        inputTokenPrice: "N/A",
+        outputTokenPrice: "N/A",
+        cost10k: "$50",
+        cost30k: "$150"
+      },
+      {
+        product: "Perplexity Search + Sonar",
+        searchFee: "$5 / 1K",
+        inputTokenPrice: "$1 / 1M",
+        outputTokenPrice: "$1 / 1M",
+        cost10k: "$90",
+        cost30k: "$270"
+      },
+      {
+        product: "Google Search API",
+        searchFee: "$5 / 1K",
+        inputTokenPrice: "N/A",
+        outputTokenPrice: "N/A",
+        cost10k: "$50",
+        cost30k: "$150"
+      },
+      {
+        product: "Google Search + Gemini 3 Flash",
+        searchFee: "$5 / 1K",
+        inputTokenPrice: "$0.25 / 1M",
+        outputTokenPrice: "$1.5 / 1M",
+        cost10k: "$73",
+        cost30k: "$218"
+      },
+      {
+        product: "OpenAI Web Search",
+        searchFee: "$10 / 1K",
+        inputTokenPrice: "N/A",
+        outputTokenPrice: "N/A",
+        cost10k: "$100",
+        cost30k: "$300"
+      },
+      {
+        product: "OpenAI Web Search + GPT-5.4",
+        searchFee: "$10 / 1K",
+        inputTokenPrice: "$2.50 / 1M",
+        outputTokenPrice: "$15.00 / 1M",
+        cost10k: "$325",
+        cost30k: "$975"
+      }
     ];
 
-    stats.forEach((stat) => {
-      const card = document.createElement("div");
-      card.className = "stat";
-      card.innerHTML = `
-        <div class="stat-label">${stat.label}</div>
-        <div class="stat-value">${stat.value}</div>
-        <div class="stat-label">${stat.note}</div>
-      `;
-      statsEl.appendChild(card);
-    });
+    const tableEl = document.getElementById("table-body");
+    const costTableEl = document.getElementById("cost-table-body");
 
-    data.forEach((row) => {
-      const barRow = document.createElement("div");
-      barRow.className = "row";
-
-      barRow.innerHTML = `
-        <div class="name">${row.model}</div>
-        <div class="tracks">
-          <div class="track-block">
-            <div class="track">
-              <div class="fill mean" style="--target-width: ${Math.max(row.meanJd * 100, 2)}%"></div>
-            </div>
-            <div class="value">${row.meanJd.toFixed(3)}</div>
-          </div>
-          <div class="track-block">
-            <div class="track">
-              <div class="fill changed" style="--target-width: ${Math.max(row.changedPct, 2)}%"></div>
-            </div>
-            <div class="value">${row.changedPct.toFixed(1)}%</div>
-          </div>
-        </div>
-      `;
-      barsEl.appendChild(barRow);
-
+    sensitivityData.forEach((row) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${row.model}</td>
@@ -364,6 +310,19 @@
         <td>${row.changedPct.toFixed(1)}%</td>
       `;
       tableEl.appendChild(tr);
+    });
+
+    costData.forEach((row) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${row.product}</td>
+        <td>${row.searchFee}</td>
+        <td>${row.inputTokenPrice}</td>
+        <td>${row.outputTokenPrice}</td>
+        <td>${row.cost10k}</td>
+        <td>${row.cost30k}</td>
+      `;
+      costTableEl.appendChild(tr);
     });
   </script>
 </body>
