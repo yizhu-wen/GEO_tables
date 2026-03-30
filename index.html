@@ -50,21 +50,20 @@
       margin-top: 20px;
     }
 
-    .panel h2 {
-      margin: 0 0 6px;
-      font-size: 1.4rem;
-    }
-
-    .panel p {
-      margin: 0 0 20px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 1.16rem;
+    }
+
+    caption {
+      caption-side: top;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--text);
+      text-align: center;
     }
 
     th,
@@ -115,13 +114,21 @@
     .taxonomy-table tbody td:nth-child(2) {
       padding-left: 52px;
     }
+
+    .taxonomy-table thead tr:first-child th:nth-child(3),
+    .taxonomy-table thead tr:last-child th:nth-child(4),
+    .taxonomy-table tbody td:nth-child(5) {
+      border-left: 1px solid rgba(61, 43, 31, 0.24);
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="panel">
-      <h2>API Cost</h2>
       <table>
+        <caption>
+          Estimated API cost comparison across search-only and search-plus-generation setups for 10k and 30k queries.
+        </caption>
         <thead>
           <tr>
             <th>Product</th>
@@ -137,8 +144,10 @@
     </section>
 
     <section class="panel">
-      <h2>Taxonomy</h2>
       <table class="taxonomy-table">
+        <caption>
+          Taxonomy of identifying GEO and addressing GEO.
+        </caption>
         <colgroup>
           <col style="width: 22%;">
           <col style="width: 13%;">
@@ -223,8 +232,10 @@
     </section>
 
     <section class="panel">
-      <h2>Sensitivity Test</h2>
       <table>
+        <caption>
+          Sensitivity test results showing mean J<sub>d</sub> and percentage change across evaluated models.
+        </caption>
         <thead>
           <tr>
             <th>Model</th>
