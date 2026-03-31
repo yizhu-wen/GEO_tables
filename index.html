@@ -241,6 +241,7 @@
             <th>Model</th>
             <th>Mean J<sub>d</sub></th>
             <th>% Change</th>
+            <th>Gini</th>
           </tr>
         </thead>
         <tbody id="table-body"></tbody>
@@ -250,13 +251,13 @@
 
   <script>
     const sensitivityData = [
-      { model: "Gemini-3-flash", meanJd: 0.869, changedPct: 100.0 },
-      { model: "Gemini-3.1-lite", meanJd: 0.698, changedPct: 100.0 },
-      { model: "Gemini-2.5-flash", meanJd: 0.680, changedPct: 100.0 },
-      { model: "GPT-5.4", meanJd: 0.686, changedPct: 83.3 },
-      { model: "GPT-5.4-mini", meanJd: 0.593, changedPct: 66.7 },
-      { model: "GPT-4.1", meanJd: 0.381, changedPct: 46.7 },
-      { model: "GPT-4o", meanJd: 0.133, changedPct: 13.3 }
+      { model: "Gemini-3-flash", meanJd: 0.869, changedPct: 100.0, gini: 0.201 },
+      { model: "Gemini-3.1-lite", meanJd: 0.698, changedPct: 100.0, gini: 0.145 },
+      { model: "Gemini-2.5-flash", meanJd: 0.680, changedPct: 100.0, gini: 0.176 },
+      { model: "GPT-5.4", meanJd: 0.686, changedPct: 83.3, gini: 0.431 },
+      { model: "GPT-5.4-mini", meanJd: 0.593, changedPct: 66.7, gini: 0.441 },
+      { model: "GPT-4.1", meanJd: 0.381, changedPct: 46.7, gini: 0.415 },
+      { model: "GPT-4o", meanJd: 0.133, changedPct: 13.3, gini: 0.447 }
     ];
 
     const costData = [
@@ -319,6 +320,7 @@
         <td>${row.model}</td>
         <td>${row.meanJd.toFixed(3)}</td>
         <td>${row.changedPct.toFixed(1)}%</td>
+        <td>${row.gini.toFixed(3)}</td>
       `;
       tableEl.appendChild(tr);
     });
