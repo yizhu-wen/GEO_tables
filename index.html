@@ -50,6 +50,55 @@
       margin-top: 20px;
     }
 
+    .document-panel {
+      display: grid;
+      gap: 18px;
+    }
+
+    .document-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .document-title {
+      margin: 0;
+      font-size: 1.4rem;
+      line-height: 1.35;
+      text-align: left;
+    }
+
+    .document-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid rgba(61, 43, 31, 0.28);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.38);
+    }
+
+    .document-link:hover,
+    .document-link:focus-visible {
+      border-color: rgba(61, 43, 31, 0.48);
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .pdf-viewer {
+      width: 100%;
+      min-height: 78vh;
+      border: 1px solid rgba(61, 43, 31, 0.16);
+      border-radius: 8px;
+      background: #fff;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -120,10 +169,49 @@
     .taxonomy-table tbody td:nth-child(5) {
       border-left: 1px solid rgba(61, 43, 31, 0.24);
     }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 18px 10px 36px;
+      }
+
+      .panel {
+        padding: 16px;
+      }
+
+      .document-header {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .document-title {
+        text-align: center;
+      }
+
+      .document-link {
+        width: 100%;
+      }
+
+      .pdf-viewer {
+        min-height: 68vh;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
+    <section class="panel document-panel">
+      <div class="document-header">
+        <h1 class="document-title">ICML 2026 GEO Position Paper</h1>
+        <a class="document-link" href="ICML_2026_GEO_Position%20%284%29.pdf" target="_blank" rel="noopener">Open PDF</a>
+      </div>
+      <iframe
+        class="pdf-viewer"
+        src="ICML_2026_GEO_Position%20%284%29.pdf"
+        title="ICML 2026 GEO Position Paper"
+      ></iframe>
+    </section>
+
     <section class="panel">
       <table>
         <caption>
